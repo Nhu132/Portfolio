@@ -3,743 +3,548 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nhu Huynh (Elena) — B2B Content Marketer</title>
+<title>Elena Huynh — B2B Content Marketer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;
+  --ink:#0d0d0d;
+  --ink-2:#4a4a4a;
+  --ink-3:#9a9a9a;
+  --accent:#5b47fb;
+  --accent-light:#ede9ff;
+  --rule:#ebebeb;
+  --card:#f8f8f8;
+  --sans:'Inter',system-ui,sans-serif;
+  --serif:'Fraunces',Georgia,serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
-  :root {
-    --ink: #1a1917;
-    --ink-2: #4a4845;
-    --ink-3: #8a8784;
-    --rule: #e4e1dc;
-    --warm-bg: #faf9f6;
-    --accent: #1a1917;
-    --accent-soft: #f0ede6;
-    --serif: 'DM Serif Display', Georgia, serif;
-    --sans: 'DM Sans', system-ui, sans-serif;
-    --mono: 'DM Mono', monospace;
-  }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.125rem 4rem;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--rule)}
+.nav-logo{font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:-0.01em}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{font-size:13px;color:var(--ink-3);text-decoration:none;transition:color .2s;font-weight:400}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--accent)!important;color:#fff!important;padding:6px 14px;border-radius:6px;font-weight:500!important}
+.nav-cta:hover{background:#4a38e8!important;color:#fff!important}
 
-  html { scroll-behavior: smooth; }
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding:8rem 4rem 5rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;top:0;right:0;width:50%;height:100%;background:linear-gradient(135deg,#f5f2ff 0%,#ede9ff 100%);clip-path:polygon(15% 0,100% 0,100% 100%,0% 100%);z-index:0}
+.hero-content{position:relative;z-index:1;max-width:680px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-light);color:var(--accent);font-size:12px;font-weight:500;padding:6px 12px;border-radius:100px;margin-bottom:2rem;letter-spacing:0.01em}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+h1{font-family:var(--serif);font-size:clamp(2.25rem,5vw,3.75rem);font-weight:400;line-height:1.1;letter-spacing:-0.02em;color:var(--ink);margin-bottom:1.75rem}
+h1 em{font-style:italic;color:var(--accent)}
+h1 span{display:block}
+.hero-desc{font-size:16px;color:var(--ink-2);line-height:1.75;max-width:520px;margin-bottom:2.5rem}
+.hero-desc strong{color:var(--ink);font-weight:500}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:3.5rem}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:11px 20px;font-size:14px;font-weight:500;border-radius:8px;text-decoration:none;transition:all .2s;font-family:var(--sans)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#4a38e8;transform:translateY(-1px);box-shadow:0 8px 24px rgba(91,71,251,.25)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--rule)}
+.btn-ghost:hover{background:var(--card);transform:translateY(-1px)}
+.hero-stats{display:flex;gap:2.5rem}
+.stat-num{font-family:var(--serif);font-size:2rem;font-weight:600;color:var(--ink);line-height:1;margin-bottom:4px}
+.stat-num .accent{color:var(--accent)}
+.stat-label{font-size:12px;color:var(--ink-3)}
 
-  body {
-    font-family: var(--sans);
-    background: var(--warm-bg);
-    color: var(--ink);
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
+/* SECTIONS */
+.section{padding:6rem 4rem}
+.section-inner{max-width:800px;margin:0 auto}
+.section-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.section-tag::before{content:'';width:20px;height:2px;background:var(--accent)}
+h2{font-family:var(--serif);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:400;color:var(--ink);line-height:1.2;letter-spacing:-0.02em;margin-bottom:1rem}
+.section-sub{font-size:16px;color:var(--ink-2);line-height:1.7;margin-bottom:3rem;max-width:560px}
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.25rem 4rem;
-    background: rgba(250,249,246,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 0.5px solid var(--rule);
-  }
-  .nav-name {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--ink);
-    letter-spacing: 0.02em;
-    text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 2rem; }
-  .nav-links a {
-    font-size: 13px;
-    color: var(--ink-3);
-    text-decoration: none;
-    letter-spacing: 0.01em;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--ink); }
+/* CASE STUDY */
+.metrics-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin-bottom:3rem}
+.metric-box{background:#fff;padding:1.5rem 1.75rem}
+.metric-label{font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.metric-val{font-family:var(--serif);font-size:2.25rem;font-weight:600;color:var(--ink);line-height:1;margin-bottom:4px}
+.metric-val .accent{color:var(--accent)}
+.metric-sub{font-size:12px;color:var(--ink-3)}
 
-  /* LAYOUT */
-  .container { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0}
+.content-card{background:var(--card);border-radius:12px;padding:1.5rem;border:1px solid var(--rule)}
+.content-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.content-card p{font-size:14px;color:var(--ink-2);line-height:1.65}
 
-  section { padding: 5rem 0; border-bottom: 0.5px solid var(--rule); }
-  section:last-child { border-bottom: none; }
+.pullquote{border-left:3px solid var(--accent);padding:1.25rem 1.5rem;margin:2.5rem 0;background:var(--accent-light);border-radius:0 10px 10px 0}
+.pullquote p{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--ink);line-height:1.5}
 
-  /* HERO */
-  #hero {
-    padding-top: 10rem;
-    padding-bottom: 5rem;
-  }
-  .hero-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--ink-3);
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    display: flex; align-items: center; gap: 0.75rem;
-  }
-  .hero-label::before {
-    content: '';
-    display: inline-block;
-    width: 24px; height: 1px;
-    background: var(--ink-3);
-  }
-  h1 {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 5vw, 3.25rem);
-    font-weight: 400;
-    line-height: 1.15;
-    color: var(--ink);
-    margin-bottom: 2rem;
-    letter-spacing: -0.01em;
-  }
-  h1 em {
-    font-style: italic;
-    color: var(--ink-2);
-  }
-  .hero-body {
-    font-size: 16px;
-    color: var(--ink-2);
-    line-height: 1.75;
-    max-width: 600px;
-    margin-bottom: 2.5rem;
-  }
-  .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 0.625rem 1.25rem;
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 500;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: all 0.2s;
-    letter-spacing: 0.01em;
-  }
-  .btn-primary {
-    background: var(--ink);
-    color: var(--warm-bg);
-  }
-  .btn-primary:hover { background: #333; }
-  .btn-secondary {
-    background: transparent;
-    color: var(--ink);
-    border: 0.5px solid var(--rule);
-  }
-  .btn-secondary:hover { background: var(--accent-soft); }
+.action-list{display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin:1.5rem 0}
+.action-item{background:#fff;padding:1.25rem 1.5rem;display:flex;gap:1rem;align-items:flex-start}
+.action-icon{width:32px;height:32px;border-radius:8px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
+.action-item h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.action-item p{font-size:14px;color:var(--ink-2);line-height:1.6;margin:0}
 
-  /* SECTION HEADERS */
-  .section-header {
-    display: flex; align-items: baseline; gap: 1.5rem;
-    margin-bottom: 3rem;
-  }
-  .section-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-3);
-    letter-spacing: 0.08em;
-  }
-  h2 {
-    font-family: var(--serif);
-    font-size: 1.75rem;
-    font-weight: 400;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-  }
+.reflection-box{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:1.75rem;margin-top:2rem}
+.reflection-box .label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.75rem}
+.reflection-box p{font-size:15px;color:var(--ink-2);line-height:1.7}
 
-  /* CASE STUDY */
-  .case-meta {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--rule);
-    border: 0.5px solid var(--rule);
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 2.5rem;
-  }
-  .meta-item {
-    background: var(--warm-bg);
-    padding: 1.25rem;
-  }
-  .meta-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin-bottom: 4px;
-  }
-  .meta-value {
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--ink);
-  }
-  .meta-sub {
-    font-size: 12px;
-    color: var(--ink-3);
-    margin-top: 2px;
-  }
+/* THINKING — dark section */
+#thinking{background:var(--ink)}
+#thinking .section-tag{color:#a89ffc}
+#thinking .section-tag::before{background:#a89ffc}
+#thinking h2{color:#fff}
+#thinking .section-sub{color:#9a9a9a}
 
-  .prose { color: var(--ink-2); line-height: 1.75; }
-  .prose p { margin-bottom: 1.25rem; }
-  .prose p:last-child { margin-bottom: 0; }
+.thinking-cards{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;margin-bottom:2.5rem}
+.thinking-card{background:var(--ink);padding:2rem;transition:background .2s}
+.thinking-card:hover{background:#1a1a1a}
+.thinking-card-num{font-size:11px;font-weight:600;letter-spacing:0.08em;color:#5b47fb;text-transform:uppercase;margin-bottom:1rem}
+.thinking-card h3{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:#fff;line-height:1.35;margin-bottom:1rem}
+.thinking-card p{font-size:14px;color:#9a9a9a;line-height:1.7;margin-bottom:1rem}
+.thinking-card p:last-of-type{margin-bottom:0}
+.thinking-highlight{background:rgba(91,71,251,.15);border:1px solid rgba(91,71,251,.3);border-radius:8px;padding:1rem 1.25rem;margin-top:1rem}
+.thinking-highlight p{font-size:13px;color:#c4bbff;line-height:1.6;margin:0}
 
-  .section-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin-bottom: 0.75rem;
-    margin-top: 2rem;
-  }
-  .section-label:first-child { margin-top: 0; }
+.steps-dark{display:flex;flex-direction:column;gap:0;margin-top:2rem}
+.step-dark{display:flex;gap:1.5rem;padding:1.5rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.step-dark:last-child{border-bottom:none}
+.step-dark-num{font-family:var(--serif);font-size:2rem;font-weight:400;color:rgba(91,71,251,.4);line-height:1;flex-shrink:0;width:40px}
+.step-dark h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:6px}
+.step-dark p{font-size:14px;color:#9a9a9a;line-height:1.65;margin:0}
 
-  .action-cards {
-    display: flex; flex-direction: column; gap: 0;
-    border: 0.5px solid var(--rule);
-    border-radius: 6px;
-    overflow: hidden;
-    margin: 1.5rem 0;
-  }
-  .action-card {
-    padding: 1.25rem 1.5rem;
-    border-bottom: 0.5px solid var(--rule);
-    background: var(--warm-bg);
-  }
-  .action-card:last-child { border-bottom: none; }
-  .action-card-title {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 0.375rem;
-  }
-  .action-card p {
-    font-size: 14px;
-    color: var(--ink-2);
-    line-height: 1.65;
-    margin: 0;
-  }
+.honest-box{background:rgba(91,71,251,.1);border:1px solid rgba(91,71,251,.2);border-radius:12px;padding:1.5rem;margin-top:2.5rem}
+.honest-box .label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#a89ffc;margin-bottom:0.75rem}
+.honest-box p{font-size:14px;color:#9a9a9a;line-height:1.7;margin:0}
 
-  .pullquote {
-    border-left: 2px solid var(--ink);
-    padding: 1rem 1.5rem;
-    margin: 2rem 0;
-    font-family: var(--serif);
-    font-size: 17px;
-    color: var(--ink);
-    line-height: 1.6;
-    font-style: italic;
-  }
+/* WRITING */
+.sample-cards{display:flex;flex-direction:column;gap:16px}
+.sample-card{border:1px solid var(--rule);border-radius:12px;overflow:hidden;transition:box-shadow .2s,transform .2s}
+.sample-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.08);transform:translateY(-2px)}
+.sample-head{padding:1.5rem}
+.sample-type-row{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
+.sample-badge{font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border-radius:100px;background:var(--accent-light);color:var(--accent)}
+.sample-date{font-size:12px;color:var(--ink-3)}
+.sample-head h3{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:0.75rem;line-height:1.35}
+.sample-meta{font-size:13px;color:var(--ink-2);line-height:1.75}
+.sample-meta strong{color:var(--ink);font-weight:500}
+.sample-quote{background:var(--accent-light);border-top:1px solid #ddd6ff;padding:1.25rem 1.5rem}
+.sample-quote-label{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.sample-quote blockquote{font-family:var(--serif);font-size:14px;font-style:italic;color:var(--ink);line-height:1.6;margin-bottom:8px}
+.sample-quote .why{font-size:12px;color:var(--ink-3);line-height:1.55}
+.sample-foot{padding:1rem 1.5rem;border-top:1px solid var(--rule)}
+.sample-foot a{font-size:13px;color:var(--accent);text-decoration:none;font-weight:500;display:inline-flex;align-items:center;gap:4px}
+.sample-foot a:hover{text-decoration:underline}
+.samples-note{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:1.25rem 1.5rem;margin-top:1.5rem}
+.samples-note p{font-size:13px;color:var(--ink-2);line-height:1.7}
+.samples-note strong{color:var(--ink);font-weight:500}
 
-  .reflection {
-    background: var(--accent-soft);
-    border-radius: 6px;
-    padding: 1.5rem;
-    margin-top: 2rem;
-  }
-  .reflection .section-label { margin-top: 0; }
+/* TOOLS */
+#tools{background:var(--card)}
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:2rem}
+.tool-card{background:#fff;border:1px solid var(--rule);border-radius:12px;padding:1.5rem}
+.tool-card-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.tool-list{list-style:none}
+.tool-list li{font-size:14px;color:var(--ink-2);padding:6px 0;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:8px}
+.tool-list li:last-child{border-bottom:none}
+.tool-list li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.edu-row{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;background:#fff;border:1px solid var(--rule);border-radius:12px}
+.edu-icon{width:40px;height:40px;border-radius:10px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.edu-title{font-size:14px;font-weight:500;color:var(--ink)}
+.edu-sub{font-size:13px;color:var(--ink-3);margin-top:2px}
 
-  /* THINKING */
-  .thinking-block {
-    padding: 2rem 0;
-    border-bottom: 0.5px solid var(--rule);
-  }
-  .thinking-block:last-child { border-bottom: none; }
-  .thinking-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-3);
-    letter-spacing: 0.06em;
-    margin-bottom: 0.75rem;
-  }
-  .thinking-block h3 {
-    font-family: var(--serif);
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: var(--ink);
-    margin-bottom: 1rem;
-    line-height: 1.3;
-  }
+/* FOOTER */
+footer{background:var(--ink);padding:3rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+.footer-name{font-family:var(--serif);font-size:1.25rem;color:#fff;font-weight:400}
+.footer-contacts{display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap}
+.footer-contacts a{font-size:13px;color:#9a9a9a;text-decoration:none;transition:color .2s}
+.footer-contacts a:hover{color:#fff}
 
-  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.25rem; }
-  .tag {
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 3px;
-    background: var(--accent-soft);
-    color: var(--ink-2);
-    letter-spacing: 0.02em;
-  }
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
 
-  .steps { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.25rem; }
-  .step { display: flex; gap: 1rem; align-items: flex-start; }
-  .step-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-3);
-    min-width: 20px;
-    padding-top: 2px;
-  }
-  .step-content h4 {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 3px;
-  }
-  .step-content p {
-    font-size: 14px;
-    color: var(--ink-2);
-    line-height: 1.65;
-    margin: 0;
-  }
-
-  /* WRITING SAMPLES */
-  .sample-card {
-    border: 0.5px solid var(--rule);
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 1.25rem;
-  }
-  .sample-head { padding: 1.5rem; }
-  .sample-type-row {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 0.875rem;
-  }
-  .sample-type {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 3px;
-    background: var(--accent-soft);
-    color: var(--ink-2);
-  }
-  .sample-date {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-3);
-  }
-  .sample-head h3 {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 0.75rem;
-    line-height: 1.4;
-  }
-  .sample-meta {
-    font-size: 13px;
-    color: var(--ink-2);
-    line-height: 1.65;
-  }
-  .sample-meta strong { color: var(--ink); font-weight: 500; }
-  .sample-highlight {
-    background: var(--accent-soft);
-    border-top: 0.5px solid var(--rule);
-    padding: 1.25rem 1.5rem;
-  }
-  .sample-highlight-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin-bottom: 0.625rem;
-  }
-  .sample-highlight blockquote {
-    font-family: var(--serif);
-    font-size: 14px;
-    font-style: italic;
-    color: var(--ink);
-    line-height: 1.65;
-    margin-bottom: 0.75rem;
-  }
-  .sample-highlight .why {
-    font-size: 12px;
-    color: var(--ink-3);
-    line-height: 1.55;
-  }
-  .sample-foot {
-    border-top: 0.5px solid var(--rule);
-    padding: 0.875rem 1.5rem;
-  }
-  .sample-foot a {
-    font-size: 13px;
-    color: var(--ink);
-    text-decoration: none;
-    display: inline-flex; align-items: center; gap: 4px;
-    border-bottom: 0.5px solid var(--ink-3);
-    padding-bottom: 1px;
-    transition: border-color 0.2s;
-  }
-  .sample-foot a:hover { border-color: var(--ink); }
-
-  .samples-note {
-    background: var(--accent-soft);
-    border-radius: 6px;
-    padding: 1.25rem 1.5rem;
-    margin-top: 1.5rem;
-  }
-  .samples-note p {
-    font-size: 13px;
-    color: var(--ink-2);
-    line-height: 1.65;
-    margin: 0;
-  }
-  .samples-note strong { color: var(--ink); font-weight: 500; }
-
-  /* TOOLS */
-  .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1px;
-    background: var(--rule);
-    border: 0.5px solid var(--rule);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  .tool-group { background: var(--warm-bg); padding: 1.25rem; }
-  .tool-group-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin-bottom: 0.75rem;
-  }
-  .tool-list { list-style: none; }
-  .tool-list li {
-    font-size: 14px;
-    color: var(--ink-2);
-    padding: 3px 0;
-  }
-
-  /* FOOTER */
-  footer {
-    padding: 3rem 0;
-    text-align: center;
-  }
-  footer p {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--ink-3);
-    letter-spacing: 0.04em;
-  }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .fade-up {
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards;
-  }
-  .fade-up:nth-child(1) { animation-delay: 0.1s; }
-  .fade-up:nth-child(2) { animation-delay: 0.25s; }
-  .fade-up:nth-child(3) { animation-delay: 0.4s; }
-  .fade-up:nth-child(4) { animation-delay: 0.55s; }
-
-  @media (max-width: 640px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .container { padding: 0 1.25rem; }
-    section { padding: 3.5rem 0; }
-    #hero { padding-top: 7rem; }
-    .case-meta { grid-template-columns: repeat(3, 1fr); }
-    .meta-value { font-size: 18px; }
-  }
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  #hero{padding:7rem 1.5rem 4rem}
+  .hero-bg{width:100%;height:35%;top:auto;bottom:0;clip-path:polygon(0 30%,100% 0,100% 100%,0 100%)}
+  .hero-stats{gap:1.5rem;flex-wrap:wrap}
+  .section{padding:4rem 1.5rem}
+  .content-grid{grid-template-columns:1fr}
+  .metrics-row{grid-template-columns:repeat(3,1fr)}
+  .metric-val{font-size:1.6rem}
+  .tools-grid{grid-template-columns:1fr}
+  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center}
+  .footer-contacts{justify-content:center}
+}
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-name">Elena Huynh</a>
+  <a href="#hero" class="nav-logo">Elena Huynh</a>
   <div class="nav-links">
-    <a href="#case-study">Case study</a>
+    <a href="#case-study">Case study 01</a>
+    <a href="#case-study-2">Case study 02</a>
     <a href="#thinking">How I think</a>
     <a href="#writing">Writing</a>
     <a href="#tools">Tools</a>
+    <a href="mailto:nhuhuynhleyen132@gmail.com" class="nav-cta">Get in touch</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="container">
-    <div class="hero-label fade-up">B2B Content Marketer · Ho Chi Minh City</div>
-    <h1 class="fade-up">
-      I write for buyers who<br>
-      <em>can't afford to be wrong.</em>
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge reveal">B2B Content Marketer · Ho Chi Minh City</div>
+    <h1 class="reveal">
+      <span>I write for buyers</span>
+      <span>who <em>can't afford</em></span>
+      <span>to be wrong.</span>
     </h1>
-    <p class="hero-body fade-up">
-      I'm a B2B content marketer with a background in industrial tech — writing for buyers who make high-stakes purchasing decisions in complex, technical environments. My approach starts with the buyer's problem, not the product brief. At Gremsy, that meant learning why a systems integrator in Hamburg cares about IEC 62443 certification before they'll consider a new gimbal vendor — and making sure that concern showed up in the content before they had to ask.
-      <br><br>
-      I'm looking for a role where content is treated as a strategic function, not a production line — and where there's room to build the kind of feedback loops that connect content to pipeline.
+    <p class="hero-desc reveal">
+      B2B content marketer with hands-on experience in <strong>industrial tech</strong> — writing for systems integrators and enterprise buyers across 40+ countries. I start with the buyer's fear, not the product brief.
     </p>
-    <div class="hero-links fade-up">
+    <div class="hero-actions reveal">
       <a href="#case-study" class="btn btn-primary">See my work ↓</a>
-      <a href="mailto:nhuhuynhleyen132@gmail.com" class="btn btn-secondary">Get in touch</a>
-      <a href="https://www.linkedin.com/in/elena-nhu-huynh-a3bb82235/" target="_blank" class="btn btn-secondary">LinkedIn ↗</a>
+      <a href="https://www.linkedin.com/in/elena-nhu-huynh-a3bb82235/" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+      <a href="mailto:nhuhuynhleyen132@gmail.com" class="btn btn-ghost">Contact ✉</a>
+    </div>
+    <div class="hero-stats reveal">
+      <div class="stat-item">
+        <div class="stat-num" data-target="50"><span class="accent">+</span><span class="count">0</span>%</div>
+        <div class="stat-label">LinkedIn growth in 4 months</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span class="accent">~</span>15%</div>
+        <div class="stat-label">Engagement lift</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span class="accent">−</span>2mo</div>
+        <div class="stat-label">Ahead of KPI target</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- CASE STUDY -->
-<section id="case-study">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-num">01</span>
-      <h2>Case study</h2>
-    </div>
+<section id="case-study" class="section">
+  <div class="section-inner">
+    <div class="section-tag reveal">01 — Case study</div>
+    <h2 class="reveal">From product specs<br>to solution stories</h2>
+    <p class="section-sub reveal">Gremsy JSC · Industrial drone hardware · Mar 2024 – Jun 2025 · Sole marketer</p>
 
-    <p style="font-size:13px; color:var(--ink-3); margin-bottom:2rem; font-family:var(--mono); letter-spacing:0.02em;">
-      Gremsy JSC · B2B Industrial Drone Hardware · Mar 2024 – Jun 2025
-    </p>
-
-    <p style="font-size:1.15rem; font-family:var(--serif); color:var(--ink); margin-bottom:2rem; line-height:1.45;">
-      From product specs to solution stories — rebuilding B2B content at Gremsy
-    </p>
-
-    <div class="case-meta">
-      <div class="meta-item">
-        <div class="meta-label">LinkedIn growth</div>
-        <div class="meta-value">+50%</div>
-        <div class="meta-sub">in 4 months</div>
+    <div class="metrics-row reveal">
+      <div class="metric-box">
+        <div class="metric-label">LinkedIn growth</div>
+        <div class="metric-val"><span class="accent">+</span>50%</div>
+        <div class="metric-sub">in 4 months</div>
       </div>
-      <div class="meta-item">
-        <div class="meta-label">Engagement lift</div>
-        <div class="meta-value">~15%</div>
-        <div class="meta-sub">via content pivot</div>
+      <div class="metric-box">
+        <div class="metric-label">Engagement</div>
+        <div class="metric-val"><span class="accent">~</span>15%</div>
+        <div class="metric-sub">via content pivot</div>
       </div>
-      <div class="meta-item">
-        <div class="meta-label">KPI hit</div>
-        <div class="meta-value">−2mo</div>
-        <div class="meta-sub">ahead of target</div>
+      <div class="metric-box">
+        <div class="metric-label">KPI achieved</div>
+        <div class="metric-val"><span class="accent">−</span>2mo</div>
+        <div class="metric-sub">ahead of schedule</div>
       </div>
     </div>
 
-    <div class="section-label">The situation</div>
-    <div class="prose">
-      <p>Gremsy makes gimbal stabilizers and camera payloads for industrial drone applications — inspection, mapping, surveillance, agriculture. When I joined, the brand had a well-maintained YouTube presence but the content wasn't speaking to the people who actually buy: systems integrators, enterprise drone operators, and industrial procurement teams. Content was product-centric — specs and features — with very little that answered "why does this matter to my operation?"</p>
-    </div>
-
-    <div class="section-label">How I thought about it</div>
-    <div class="prose">
-      <p>I started by researching not the product — but the buyers. I read how industrial players talked about their own work: what problems they named, what they cared about in field operations, why data security mattered in aerial surveillance contexts.</p>
-      <p>I noticed a pattern: the company was chasing competitors' product launches instead of building its own authority. The shift I pushed for: move from "here's what our product does" to "here's the problem our customers solve, and here's how we fit into that."</p>
-    </div>
-
-    <div class="pullquote">
-      "B2B buyers don't want to be impressed — they want to know if you understand their problem."
-    </div>
-
-    <div class="section-label">What I did</div>
-    <div class="action-cards">
-      <div class="action-card">
-        <div class="action-card-title">Social repositioning</div>
-        <p>Rebuilt LinkedIn editorial calendar around solution-first content. Contacted partners (Sony Europe, Nokia for Industries, HHLA Sky) to source real deployment imagery and co-create posts that showed Gremsy in enterprise contexts — building credibility by proximity.</p>
+    <div class="content-grid reveal">
+      <div class="content-card">
+        <h4>The situation</h4>
+        <p>Gremsy's content was product-centric — specs and features — not speaking to the real buyers: systems integrators, enterprise drone operators, industrial procurement teams.</p>
       </div>
-      <div class="action-card">
-        <div class="action-card-title">Content rewrite</div>
-        <p>Rewrote product copy to answer application questions: which payload for which integrator type, what environments each product is built for, what data workflows it supports. Spec-listing became context-setting.</p>
-      </div>
-      <div class="action-card">
-        <div class="action-card-title">Lead funnel ownership</div>
-        <p>As HubSpot super admin, built the end-to-end lead capture and nurture flow — segmentation, newsletter sends, open/click tracking — and defined the handoff point to Sales via Zoho CRM. This required understanding where in the buyer journey a lead was "sales-ready."</p>
+      <div class="content-card">
+        <h4>The pattern I noticed</h4>
+        <p>The company was chasing competitors' launches instead of building authority. Content answered "what does it do?" instead of "why does this matter to my operation?"</p>
       </div>
     </div>
 
-    <div class="reflection">
-      <div class="section-label">What I'd do differently</div>
-      <div class="prose">
-        <p>Sales and Marketing met regularly, and the team brought valuable frontline context. But looking back, I didn't always have a clear way to separate what Sales perceived about buyers from what buyers actually said about themselves. If I were to do this again, I'd supplement internal input with direct buyer signals — through content engagement patterns, newsletter reply tracking, or short feedback loops at events — to build a more independent view of what the audience actually needed at each stage.</p>
+    <div class="pullquote reveal">
+      <p>"B2B buyers don't want to be impressed — they want to know if you understand their problem."</p>
+    </div>
+
+    <div class="action-list reveal">
+      <div class="action-item">
+        <div class="action-icon">🔗</div>
+        <div>
+          <h4>Social repositioning</h4>
+          <p>Rebuilt LinkedIn editorial calendar around solution-first content. Sourced real deployment imagery from partners (Sony Europe, Nokia for Industries, HHLA Sky) to build credibility by proximity.</p>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-icon">✍️</div>
+        <div>
+          <h4>Content rewrite</h4>
+          <p>Rewrote product copy to answer application questions: which payload for which integrator type, what environments each product is built for, what data workflows it supports.</p>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-icon">📊</div>
+        <div>
+          <h4>Lead funnel ownership</h4>
+          <p>As HubSpot super admin — lead capture, segmentation, newsletter sends, open/click tracking, and defined the sales-ready handoff point to Zoho CRM.</p>
+        </div>
       </div>
     </div>
 
+    <div class="reflection-box reveal">
+      <div class="label">What I'd do differently</div>
+      <p>Sales and Marketing met regularly and brought valuable context. But I didn't always have a clear way to separate what Sales perceived about buyers from what buyers actually said. Next time: supplement internal input with direct buyer signals — engagement patterns, newsletter replies, event feedback — to build a more independent view.</p>
+    </div>
   </div>
 </section>
 
-<!-- HOW I THINK -->
-<section id="thinking">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-num">02</span>
-      <h2>How I think</h2>
-    </div>
+<!-- CASE STUDY 2 -->
+<section id="case-study-2" class="section" style="background:var(--card)">
+  <div class="section-inner">
+    <div class="section-tag reveal">02 — Case study</div>
+    <h2 class="reveal">Owning a product launch<br>end to end</h2>
+    <p class="section-sub reveal">2-Axis Pixy LR · Gremsy JSC · Oct 2024 · Role: sole content & launch owner</p>
 
-    <p class="prose" style="margin-bottom:2.5rem;">
-      <span style="color:var(--ink);">This is how I approach B2B content</span> — not from a textbook, but from working inside a hardware tech company selling to enterprise buyers across 40+ countries.
-    </p>
-
-    <div class="thinking-block">
-      <div class="thinking-num">01</div>
-      <h3>B2B buyers don't buy products. They buy the reduction of risk.</h3>
-      <div class="prose">
-        <p>In B2C, the worst outcome of a bad purchase is personal disappointment. In B2B, a wrong decision affects operations, budget cycles, and the buyer's credibility inside their own organization. That's not rational calculation — that's fear.</p>
-        <p>At Gremsy, I stopped writing about gimbal specs and started writing about what happens when a drone inspection fails mid-flight over a wind turbine. That reframe changed everything — because now the content was speaking to the fear, not the feature.</p>
+    <div class="content-grid reveal">
+      <div class="content-card">
+        <h4>The challenge</h4>
+        <p>Launch a technically complex new gimbal variant — 7 deliverables across 5 channels — in under 2 weeks, coordinating R&D, design, CS, and Sales with no dedicated project manager.</p>
       </div>
-      <div class="tag-row">
-        <span class="tag">Jobs-to-be-done</span>
-        <span class="tag">Buyer psychology</span>
-        <span class="tag">Solution framing</span>
+      <div class="content-card">
+        <h4>What made it hard</h4>
+        <p>The product had nuanced technical differentiators (SWaP architecture, 2-axis vs 3-axis tradeoffs, rover-mounted use cases) that required deep understanding before a single word of copy could be written.</p>
       </div>
     </div>
 
-    <div class="thinking-block">
-      <div class="thinking-num">02</div>
-      <h3>B2B content earns trust through specificity, not volume.</h3>
-      <div class="prose">
-        <p>B2C content can afford to be broad — reach enough people and conversion follows. B2B doesn't work that way. Your audience is small, highly informed, and immediately skeptical of generic claims.</p>
-        <p>What builds trust: using the right technical terminology, showing the product working in conditions they recognize, and letting your partners speak for you. Who you work with tells buyers more than what you say about yourself.</p>
-      </div>
-      <div class="tag-row">
-        <span class="tag">Technical credibility</span>
-        <span class="tag">Social proof</span>
-        <span class="tag">Partner co-marketing</span>
-      </div>
-    </div>
-
-    <div class="thinking-block">
-      <div class="thinking-num">03</div>
-      <h3>How I start when there's nothing yet.</h3>
-      <div class="prose" style="margin-bottom:1.25rem;">
-        <p>If I were handed a B2B SaaS with no existing content strategy, this is where I'd begin — and why.</p>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <span class="step-num">1 —</span>
-          <div class="step-content">
-            <h4>Read the ecosystem before touching the product</h4>
-            <p>Partners' websites, competitors' campaigns, the language customers use in reviews. I'm looking for patterns: what problems get named repeatedly, what the category leader is saying — and what gap they're leaving open.</p>
-          </div>
+    <div class="action-list reveal">
+      <div class="action-item">
+        <div class="action-icon">🔬</div>
+        <div>
+          <h4>Research & messaging foundation</h4>
+          <p>Sat with R&D to understand the product technically, then researched industrial players to map the real use cases buyers care about — bridge inspection, wind turbine blades, drilling rigs, confined spaces. This research shaped every piece of copy that followed.</p>
         </div>
-        <div class="step">
-          <span class="step-num">2 —</span>
-          <div class="step-content">
-            <h4>Mine Sales and Support before writing a single brief</h4>
-            <p>Not to get their opinions on content — to hear the exact words customers use when they're confused, hesitant, or won over. That language is the brief.</p>
-          </div>
+      </div>
+      <div class="action-item">
+        <div class="action-icon">📋</div>
+        <div>
+          <h4>Launch proposal & timeline</h4>
+          <p>Built the full launch plan: 7 deliverables mapped to a single timeline with clear ownership and deadlines. Identified dependencies — Quick Start content from CS, pricing from product team — and flagged them early to avoid last-minute blockers.</p>
         </div>
-        <div class="step">
-          <span class="step-num">3 —</span>
-          <div class="step-content">
-            <h4>Ask why, not what</h4>
-            <p>When I look at a competitor's campaign, I don't just note what they're doing. I ask: why this message now? What customer anxiety are they addressing? That's where the strategic gaps — and opportunities — actually live.</p>
-          </div>
+      </div>
+      <div class="action-item">
+        <div class="action-icon">✍️</div>
+        <div>
+          <h4>Content across all channels</h4>
+          <p>Wrote the news article, newsletter copy, and social posts — each with a different angle. The article led with operational use cases. The newsletter focused on the key differentiator (unobstructed view vs conventional gimbals). Social was structured for quick scanning with the most visual proof points first.</p>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-icon">🎬</div>
+        <div>
+          <h4>Media briefing</h4>
+          <p>Briefed design and video team with enough technical and strategic context that they could produce on-brand visuals without back-and-forth — product angles that showed the front-mount design clearly, video scripted around the inspection use case narrative.</p>
         </div>
       </div>
     </div>
 
-    <div class="reflection" style="margin-top:2rem;">
-      <div class="section-label">The honest gap</div>
-      <p class="prose">I haven't yet had the environment to build a full-funnel content system with clean attribution and pipeline metrics. That's what I'm looking for next — a company where content is taken seriously enough to be measured properly.</p>
+    <div style="margin:2rem 0;background:#fff;border:1px solid var(--rule);border-radius:12px;overflow:hidden" class="reveal">
+      <div style="padding:1.25rem 1.5rem;border-bottom:1px solid var(--rule)">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.75rem">Deliverables shipped on launch day</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px">
+          <div style="background:var(--accent-light);border-radius:8px;padding:10px 12px;font-size:13px;font-weight:500;color:var(--accent)">News / PR article</div>
+          <div style="background:var(--accent-light);border-radius:8px;padding:10px 12px;font-size:13px;font-weight:500;color:var(--accent)">Pre-launch newsletter</div>
+          <div style="background:var(--accent-light);border-radius:8px;padding:10px 12px;font-size:13px;font-weight:500;color:var(--accent)">Launch newsletter</div>
+          <div style="background:var(--accent-light);border-radius:8px;padding:10px 12px;font-size:13px;font-weight:500;color:var(--accent)">Social (pre + launch)</div>
+          <div style="background:var(--accent-light);border-radius:8px;padding:10px 12px;font-size:13px;font-weight:500;color:var(--accent)">Store listing</div>
+          <div style="background:var(--accent-light);border-radius:8px;padding:10px 12px;font-size:13px;font-weight:500;color:var(--accent)">Specs page</div>
+          <div style="background:var(--accent-light);border-radius:8px;padding:10px 12px;font-size:13px;font-weight:500;color:var(--accent)">Video + photo brief</div>
+        </div>
+      </div>
+      <div style="padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <span style="font-size:13px;color:var(--ink-2)">See the full launch proposal — structure, timeline, and messaging framework</span>
+        <a href="https://drive.google.com/file/d/10M1OUCZC895irkv8b40VQanCynEgaRb_/view?usp=sharing" target="_blank" style="font-size:13px;font-weight:500;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:4px;white-space:nowrap">View launch proposal →</a>
+      </div>
     </div>
 
+    <div class="reflection-box reveal">
+      <div class="label">What this showed me</div>
+      <p>Product launches in B2B hardware are only partly about content quality — they're mostly about sequencing, dependency management, and knowing which questions to ask R&D before it's too late to change the messaging. The content is the last 20%. The other 80% is understanding the product well enough to make the right calls when nobody's telling you what to do.</p>
+    </div>
   </div>
 </section>
 
-<!-- WRITING SAMPLES -->
-<section id="writing">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-num">03</span>
-      <h2>Writing samples</h2>
-    </div>
+<!-- THINKING -->
+<section id="thinking" class="section">
+  <div class="section-inner">
+    <div class="section-tag reveal">03 — How I think</div>
+    <h2 class="reveal">B2B content is about<br>your buyer's <em style="color:#a89ffc;font-style:italic">fear of being wrong.</em></h2>
+    <p class="section-sub reveal">Not from a textbook — from working inside a hardware tech company selling to enterprise buyers across 40+ countries.</p>
 
-    <p class="prose" style="margin-bottom:2.5rem;">B2B content written for Gremsy JSC — an industrial drone hardware company selling to systems integrators, enterprise operators, and procurement teams globally. All pieces written in English, without a dedicated editor.</p>
-
-    <div class="sample-card">
-      <div class="sample-head">
-        <div class="sample-type-row">
-          <span class="sample-type">Partner announcement</span>
-          <span class="sample-date">Oct 2024</span>
-        </div>
-        <h3>Gremsy × HHLA Sky: Industrial inspection partnership</h3>
-        <div class="sample-meta">
-          <strong>Audience:</strong> Enterprise drone operators, industrial procurement teams<br>
-          <strong>Goal:</strong> Build enterprise credibility via association — show Gremsy operating at port-scale infrastructure with a certified German MRM operator<br>
-          <strong>Challenge:</strong> Translate technical integration (IEC 62443-certified ICC + Pixy LR S-Port + Sony ILX-LR1) into readable narrative without losing credibility
+    <div class="thinking-cards reveal">
+      <div class="thinking-card">
+        <div class="thinking-card-num">01</div>
+        <h3>B2B buyers don't buy products. They buy the reduction of risk.</h3>
+        <p>In B2B, a wrong decision affects operations, budget cycles, and the buyer's credibility inside their own organization. That's not rational calculation — that's fear.</p>
+        <div class="thinking-highlight">
+          <p>At Gremsy, I stopped writing about gimbal specs and started writing about what happens when a drone inspection fails over a wind turbine. Content was now speaking to the fear, not the feature.</p>
         </div>
       </div>
-      <div class="sample-highlight">
-        <div class="sample-highlight-label">Highlight passage</div>
-        <blockquote>"The ICC enables the remote (BVLOS) control of more than 100 drone operations simultaneously from a centralized control station, eliminating bottlenecks associated with traditional manual inspections…"</blockquote>
-        <p class="why">Leads with operational scale (100 drones, BVLOS), then the security credential enterprise buyers need, then deployment scope. This is the buyer's decision checklist, in order.</p>
-      </div>
-      <div class="sample-foot">
-        <a href="https://gremsy.com/explore/news/gremsy-and-hhla-sky-partner-to-revolutionize-industrial-inspections-with-drones" target="_blank">Read full article →</a>
+      <div class="thinking-card">
+        <div class="thinking-card-num">02</div>
+        <h3>B2B content earns trust through specificity, not volume.</h3>
+        <p>Your audience is small, highly informed, and skeptical of generic claims. What builds trust: technical terminology that signals you understand their world, real-world application proof, and who you partner with — that tells buyers more than anything you say about yourself.</p>
       </div>
     </div>
 
-    <div class="sample-card">
-      <div class="sample-head">
-        <div class="sample-type-row">
-          <span class="sample-type">Product launch</span>
-          <span class="sample-date">Oct 2024</span>
-        </div>
-        <h3>Two-axis Pixy LR — product announcement</h3>
-        <div class="sample-meta">
-          <strong>Audience:</strong> Systems integrators, infrastructure inspection professionals<br>
-          <strong>Goal:</strong> Lead with the operational problem (obstructed field of view), not the spec sheet<br>
-          <strong>Approach:</strong> Structured around 6 specific use cases so different integrators could self-identify their scenario immediately
+    <div class="steps-dark reveal">
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#9a9a9a;margin-bottom:1.5rem">03 — How I start from zero</div>
+      <div class="step-dark">
+        <div class="step-dark-num">1</div>
+        <div>
+          <h4>Read the ecosystem before touching the product</h4>
+          <p>Partners' sites, competitors' campaigns, customer language in reviews. Looking for patterns: what problems get named repeatedly, what the category leader is saying — and what gap they're leaving open.</p>
         </div>
       </div>
-      <div class="sample-highlight">
-        <div class="sample-highlight-label">Highlight passage</div>
-        <blockquote>"Conventional gimbal systems, often limited by airframe components or payload placement, struggle to achieve this level of coverage… Two-axis Pixy LR eliminates these limitations, streamlining workflows and reducing operational time and complexity."</blockquote>
-        <p class="why">Names the competitor pain point explicitly before introducing the solution. Integrators immediately recognize their current frustration — that recognition earns attention in B2B content.</p>
+      <div class="step-dark">
+        <div class="step-dark-num">2</div>
+        <div>
+          <h4>Mine Sales and Support before writing a single brief</h4>
+          <p>Not for their content opinions — for the exact words customers use when confused, hesitant, or won over. That language is the brief.</p>
+        </div>
       </div>
-      <div class="sample-foot">
-        <a href="https://gremsy.com/explore/news/gremsy-two-axis-pixy-lr" target="_blank">Read full article →</a>
+      <div class="step-dark">
+        <div class="step-dark-num">3</div>
+        <div>
+          <h4>Ask why, not what</h4>
+          <p>When I look at a competitor's campaign: why this message now? What customer anxiety are they addressing? That's where strategic gaps actually live.</p>
+        </div>
       </div>
     </div>
 
-    <div class="sample-card">
-      <div class="sample-head">
-        <div class="sample-type-row">
-          <span class="sample-type">Solution overview</span>
-          <span class="sample-date">Jul 2024</span>
+    <div class="honest-box reveal">
+      <div class="label">The honest gap</div>
+      <p>I haven't yet had the environment to build a full-funnel system with clean attribution and pipeline metrics. That's what I'm looking for — a company where content is taken seriously enough to be measured properly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WRITING -->
+<section id="writing" class="section">
+  <div class="section-inner">
+    <div class="section-tag reveal">04 — Writing samples</div>
+    <h2 class="reveal">Written for industrial<br>drone buyers</h2>
+    <p class="section-sub reveal">B2B content for Gremsy JSC — written in English, without a dedicated editor, for an international audience of systems integrators and enterprise operators.</p>
+
+    <div class="sample-cards">
+      <div class="sample-card reveal">
+        <div class="sample-head">
+          <div class="sample-type-row">
+            <span class="sample-badge">Partner announcement</span>
+            <span class="sample-date">Oct 2024</span>
+          </div>
+          <h3>Gremsy × HHLA Sky: Industrial inspection partnership</h3>
+          <div class="sample-meta">
+            <strong>Audience:</strong> Enterprise drone operators, industrial procurement<br>
+            <strong>Goal:</strong> Build enterprise credibility via association with a German port-scale MRM operator<br>
+            <strong>Challenge:</strong> Translate IEC 62443-certified ICC + Pixy LR S-Port + Sony ILX-LR1 integration into a readable narrative without losing technical credibility
+          </div>
         </div>
-        <h3>Gremsy solutions for Sony ILX-LR1</h3>
-        <div class="sample-meta">
-          <strong>Audience:</strong> Drone integrators evaluating gimbal compatibility<br>
-          <strong>Goal:</strong> Guide integrators toward the right Gremsy variant based on their platform (MAVLink, DJI M300/M350, open platform)<br>
-          <strong>Note:</strong> One of my earlier pieces — the intro leans on marketing language. The stronger section is the product comparison matrix in the body.
+        <div class="sample-quote">
+          <div class="sample-quote-label">Highlight passage</div>
+          <blockquote>"The ICC enables BVLOS control of 100+ drone operations simultaneously… IEC 62443 cybersecurity certified, deployed in industrial facilities worldwide."</blockquote>
+          <p class="why">Leads with operational scale, then the security credential enterprise buyers need, then deployment scope — the buyer's decision checklist, in order.</p>
+        </div>
+        <div class="sample-foot">
+          <a href="https://gremsy.com/explore/news/gremsy-and-hhla-sky-partner-to-revolutionize-industrial-inspections-with-drones" target="_blank">Read full article →</a>
         </div>
       </div>
-      <div class="sample-highlight">
-        <div class="sample-highlight-label">What I'd write differently now</div>
-        <p class="why" style="font-size:13px; color:var(--ink-2); line-height:1.65;">I'd open with the integrator's decision problem — "You've chosen the Sony ILX-LR1. Now you need a gimbal that fits your drone platform without rebuilding your integration stack" — rather than leading with Gremsy's own claims. The body structure is sound; the intro needed a sharper entry point.</p>
+
+      <div class="sample-card reveal">
+        <div class="sample-head">
+          <div class="sample-type-row">
+            <span class="sample-badge">Product launch</span>
+            <span class="sample-date">Oct 2024</span>
+          </div>
+          <h3>Two-axis Pixy LR — product announcement</h3>
+          <div class="sample-meta">
+            <strong>Audience:</strong> Systems integrators, infrastructure inspection professionals<br>
+            <strong>Goal:</strong> Lead with the operational problem (obstructed field of view), not the spec sheet<br>
+            <strong>Approach:</strong> Structured around 6 use cases so different integrators could self-identify their scenario immediately
+          </div>
+        </div>
+        <div class="sample-quote">
+          <div class="sample-quote-label">Highlight passage</div>
+          <blockquote>"Conventional gimbal systems struggle to achieve this level of coverage… Two-axis Pixy LR eliminates these limitations, streamlining workflows and reducing operational time."</blockquote>
+          <p class="why">Names the competitor pain point before the solution. Integrators recognize their current frustration immediately — that recognition is what earns attention in B2B content.</p>
+        </div>
+        <div class="sample-foot">
+          <a href="https://gremsy.com/explore/news/gremsy-two-axis-pixy-lr" target="_blank">Read full article →</a>
+        </div>
       </div>
-      <div class="sample-foot">
-        <a href="https://gremsy.com/explore/news/gremsy-is-innovative-solutions-for-sony-ilx-lr1-a-game-changer-for-aerial-industrial-applications" target="_blank">Read full article →</a>
+
+      <div class="sample-card reveal">
+        <div class="sample-head">
+          <div class="sample-type-row">
+            <span class="sample-badge">Solution overview</span>
+            <span class="sample-date">Jul 2024</span>
+          </div>
+          <h3>Gremsy solutions for Sony ILX-LR1</h3>
+          <div class="sample-meta">
+            <strong>Audience:</strong> Drone integrators evaluating gimbal compatibility<br>
+            <strong>Goal:</strong> Guide integrators toward the right Gremsy variant based on their drone platform<br>
+            <strong>Note:</strong> Earlier piece — intro leans on marketing language. The stronger section is the product comparison matrix in the body.
+          </div>
+        </div>
+        <div class="sample-quote">
+          <div class="sample-quote-label">What I'd write differently now</div>
+          <blockquote style="font-style:normal;font-family:var(--sans);font-size:13px;color:var(--ink-2)">"You've chosen the Sony ILX-LR1. Now you need a gimbal that fits your drone platform without rebuilding your integration stack." — I'd open here, not with Gremsy's own claims.</blockquote>
+        </div>
+        <div class="sample-foot">
+          <a href="https://gremsy.com/explore/news/gremsy-is-innovative-solutions-for-sony-ilx-lr1-a-game-changer-for-aerial-industrial-applications" target="_blank">Read full article →</a>
+        </div>
       </div>
     </div>
 
-    <div class="samples-note">
-      <p><strong>A note on these samples:</strong> These pieces were written without an editor, without a dedicated content brief process, and without SEO infrastructure — I was the only marketing function at the company. They're not perfect. But they reflect what I consider the core challenge of B2B content: translating technically complex products into language that helps the right buyer make a confident decision.</p>
-    </div>
+      <div class="sample-card reveal">
+        <div class="sample-head">
+          <div class="sample-type-row">
+            <span class="sample-badge">Technical enablement</span>
+            <span class="sample-date">2025</span>
+          </div>
+          <h3>VIO — Common Issues and Solutions</h3>
+          <div class="sample-meta">
+            <strong>Audience:</strong> Systems integrators and drone operators onboarding Gremsy's VIO gimbal payload<br>
+            <strong>Source material:</strong> Raw troubleshooting notes from the Customer Support team — written for internal use, not for customers<br>
+            <strong>What I did:</strong> Restructured 9 distinct technical topics (web server setup, AutoPilot connection, IP/UDP config, control modes, camera settings) into a scannable slide-based guide. Rewrote CS language into operator-friendly copy while keeping technical accuracy — IP addresses, port numbers, protocol names — intact. Also handled the visual design and layout of the entire deck.
+          </div>
+        </div>
+        <div class="sample-quote">
+          <div class="sample-quote-label">Why this matters</div>
+          <blockquote style="font-style:normal;font-family:var(--sans);font-size:14px;color:var(--ink);line-height:1.65">This piece sits at the intersection of content strategy and technical writing — taking something only CS understood and making it usable by the people who actually need it in the field. The challenge wasn't writing. It was knowing which details to keep, which to simplify, and which order a confused operator would need them in.</blockquote>
+        </div>
+        <div class="sample-foot">
+          <a href="https://drive.google.com/file/d/1ZZzzexpTRdjn8dPBuyW-9VQEn-_VJJAI/view?usp=sharing" target="_blank">View full guide →</a>
+        </div>
+      </div>
 
+    <div class="samples-note reveal">
+      <p><strong>A note:</strong> These pieces were written without an editor or dedicated content brief process — I was the only marketing function at the company. They're not perfect, but they reflect what I consider the core challenge of B2B content: translating technically complex products into language that helps the right buyer make a confident decision.</p>
+    </div>
   </div>
 </section>
 
 <!-- TOOLS -->
-<section id="tools">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-num">04</span>
-      <h2>Tools & background</h2>
-    </div>
+<section id="tools" class="section">
+  <div class="section-inner">
+    <div class="section-tag reveal">05 — Tools & background</div>
+    <h2 class="reveal">What I work with</h2>
 
-    <div class="tools-grid">
-      <div class="tool-group">
-        <div class="tool-group-label">Content & SEO</div>
+    <div class="tools-grid reveal">
+      <div class="tool-card">
+        <div class="tool-card-label">Content & SEO</div>
         <ul class="tool-list">
           <li>WordPress</li>
           <li>SEMrush</li>
@@ -747,8 +552,8 @@
           <li>Notion</li>
         </ul>
       </div>
-      <div class="tool-group">
-        <div class="tool-group-label">CRM & Email</div>
+      <div class="tool-card">
+        <div class="tool-card-label">CRM & Email</div>
         <ul class="tool-list">
           <li>HubSpot (super admin)</li>
           <li>Zoho CRM</li>
@@ -756,17 +561,17 @@
           <li>Lead segmentation</li>
         </ul>
       </div>
-      <div class="tool-group">
-        <div class="tool-group-label">Social & Analytics</div>
+      <div class="tool-card">
+        <div class="tool-card-label">Social & Analytics</div>
         <ul class="tool-list">
-          <li>LinkedIn (organic)</li>
+          <li>LinkedIn organic</li>
           <li>Meta Business Suite</li>
           <li>Meta Insights</li>
           <li>HubSpot reporting</li>
         </ul>
       </div>
-      <div class="tool-group">
-        <div class="tool-group-label">AI & Productivity</div>
+      <div class="tool-card">
+        <div class="tool-card-label">AI & Productivity</div>
         <ul class="tool-list">
           <li>ChatGPT / Claude</li>
           <li>Notion AI</li>
@@ -776,37 +581,61 @@
       </div>
     </div>
 
-    <div style="margin-top:2.5rem; padding-top:2rem; border-top:0.5px solid var(--rule);">
-      <div class="section-label">Education</div>
-      <p style="font-size:15px; color:var(--ink-2);">University of Economics Ho Chi Minh City — Finance & Banking, 2018–2022</p>
+    <div class="edu-row reveal">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-title">University of Economics Ho Chi Minh City</div>
+        <div class="edu-sub">Finance & Banking · 2018–2022</div>
+      </div>
     </div>
-
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <div class="container">
-    <p>Nhu Huynh (Elena) · nhuhuynhleyen132@gmail.com · 036 208 1910</p>
+  <div class="footer-name">Elena Huynh</div>
+  <div class="footer-contacts">
+    <a href="mailto:nhuhuynhleyen132@gmail.com">nhuhuynhleyen132@gmail.com</a>
+    <a href="tel:0362081910">036 208 1910</a>
+    <a href="https://www.linkedin.com/in/elena-nhu-huynh-a3bb82235/" target="_blank">LinkedIn ↗</a>
   </div>
 </footer>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.action-card, .thinking-block, .sample-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(16px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(el);
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), 80);
+      observer.unobserve(entry.target);
+    }
   });
-</script>
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+// Animated counter
+function animateCount(el, target, duration=1400) {
+  let start = null;
+  const step = ts => {
+    if (!start) start = ts;
+    const progress = Math.min((ts - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(ease * target);
+    if (progress < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const countEl = entry.target.querySelector('.count');
+      const target = parseInt(entry.target.dataset.target);
+      if (countEl && target) animateCount(countEl, target);
+      counterObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
+</script>
 </body>
 </html>
