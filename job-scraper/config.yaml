@@ -1,0 +1,85 @@
+# Cấu hình tool cào jobs. Sửa file này rồi push lên GitHub là lần chạy sau áp dụng.
+
+# Từ khoá dùng để TÌM KIẾM trên từng trang.
+search_terms:
+  - B2B content lead
+  - content lead
+  - head of content
+  - content marketing lead
+  - marketing lead
+
+# Chỉ giữ job có TIÊU ĐỀ khớp ít nhất một pattern (regex, không phân biệt hoa thường).
+title_include:
+  - content\s*(marketing\s*)?lead(er)?
+  - head\s+of\s+content
+  - content\s+(marketing\s+)?manager
+  - lead,?\s+content
+  - marketing\s+lead(er)?
+  - head\s+of\s+marketing
+  - marketing\s+team\s+lead(er)?
+  - lead,?\s+marketing
+  - trưởng\s+(nhóm|bộ\s+phận|phòng)\s+(content|nội\s+dung|marketing)
+  - (content|marketing)\s+team\s*lead(er)?
+
+# Bỏ job có tiêu đề khớp các pattern này.
+title_exclude:
+  - intern
+  - thực\s+tập
+  - fresher
+  - junior
+  - assistant
+  - trợ\s+lý
+  - sales\s+(executive|representative)
+
+# Địa điểm (cho job không remote): giữ job ở các khu vực này.
+locations:
+  - hồ\s+chí\s+minh
+  - ho\s+chi\s+minh
+  - hcm
+  - sài\s+gòn
+  - saigon
+
+# Job remote quốc tế: giữ nếu khu vực tuyển khớp các pattern này hoặc để trống.
+remote_regions:
+  - worldwide
+  - anywhere
+  - global
+  - asia
+  - apac
+  - southeast
+  - vietnam
+  - utc\s*\+\s*[5-9]
+  - gmt\s*\+\s*[5-9]
+
+# Đánh dấu cột "Tín hiệu B2B" khi mô tả/tiêu đề chứa các từ này.
+b2b_signals:
+  - b2b
+  - saas
+  - enterprise
+  - software
+  - it\s+services
+  - outsourc
+  - tech(nology)?\s+company
+  - demand\s+gen
+  - account[-\s]based
+  - lead\s+gen
+
+# Chỉ lấy job đăng trong N ngày gần nhất (khi nguồn cung cấp ngày đăng).
+max_age_days: 14
+
+# Bật/tắt từng nguồn.
+sources:
+  remotive: true
+  remoteok: true
+  weworkremotely: true
+  himalayas: true
+  vietnamworks: true
+  topcv: true
+  careerviet: true
+  linkedin: true        # qua thư viện JobSpy
+  indeed: true          # qua thư viện JobSpy (vn.indeed.com)
+  google_jobs: true     # cần secret SERPAPI_KEY; không có key thì bỏ qua
+
+# Google Sheet
+sheet:
+  worksheet: Jobs
