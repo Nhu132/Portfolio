@@ -32,6 +32,14 @@ def fetch(config, http) -> list[Job]:
                 location=location,
                 salary=j.get("prettySalary", "") or "",
                 posted_at=parse_date(j.get("approvedOn") or j.get("createdOn")),
-                description=j.get("jobDescription", "") or "",
+                description=_description(j),
             ))
     return jobs
+
+
+def _description(j: dict) -> str:
+    parts = [j.get("jobDescription") or "", j.get("jobRequirement") or ""]
+    years = j.get("yearsOfExperience")
+    if isinstance(years, int) and years > 0:
+        parts.append(f"Yêu cầu {years} năm kinh nghiệm")
+    return " ".join(parts)

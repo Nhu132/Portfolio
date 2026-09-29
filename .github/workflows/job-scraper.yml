@@ -2,7 +2,7 @@ name: Job scraper
 
 on:
   schedule:
-    - cron: "7 1 * * *"   # 08:07 sáng giờ VN mỗi ngày
+    - cron: "7 1,7 * * *"   # 08:07 và 14:07 giờ VN mỗi ngày: bắt tin mới đăng sớm
   workflow_dispatch:       # nút "Run workflow" để chạy tay
   push:                    # sửa code/config thì chạy thử (không ghi Sheet)
     paths:

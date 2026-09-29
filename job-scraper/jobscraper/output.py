@@ -11,17 +11,18 @@ log = logging.getLogger(__name__)
 VN_TZ = timezone(timedelta(hours=7))
 
 HEADER = [
-    "ID", "Ngày tìm thấy", "Nguồn", "Vị trí", "Công ty", "Địa điểm", "Remote",
-    "Lương", "Ngày đăng", "Tín hiệu B2B", "Link", "Trạng thái", "Ghi chú",
+    "ID", "Ngày tìm thấy", "Điểm phù hợp", "Vị trí", "Công ty", "Địa điểm", "Remote", "Lương",
+    "Ngày đăng", "KN yêu cầu", "Vì sao phù hợp", "Nguồn", "Link", "Trạng thái", "Ghi chú",
 ]
+LAST_COL = chr(ord("A") + len(HEADER) - 1)
 
 
-def to_row(job: Job, today: str) -> list[str]:
+def to_row(job: Job, today: str) -> list:
     posted = job.posted_at.astimezone(VN_TZ).strftime("%Y-%m-%d") if job.posted_at else ""
     return [
-        job.key, today, job.source, job.title, job.company, job.location,
-        "Có" if job.remote else "", job.salary, posted, ", ".join(job.b2b_signals),
-        job.url, "Mới", "",
+        job.key, today, job.score, job.title, job.company, job.location,
+        "Có" if job.remote else "", job.salary, posted, job.years_required, " · ".join(job.reasons),
+        job.source, job.url, "Mới", "",
     ]
 
 
@@ -57,7 +58,7 @@ def write_sheet(jobs: list[Job], sheet_id: str, worksheet: str, credentials_json
             )
         ws.update([HEADER], "A1")
         ws.freeze(rows=1)
-        ws.format("A1:M1", {"textFormat": {"bold": True}})
+        ws.format(f"A1:{LAST_COL}1", {"textFormat": {"bold": True}})
 
     existing = set(ws.col_values(1)[1:])
     new = [j for j in jobs if j.key not in existing]

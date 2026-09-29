@@ -16,7 +16,6 @@ class JobFilter:
         self.exclude = _any(config["title_exclude"])
         self.locations = _any(config["locations"])
         self.remote_regions = _any(config["remote_regions"])
-        self.b2b = _any(config["b2b_signals"])
         self.max_age = timedelta(days=config.get("max_age_days", 14))
 
     def title_ok(self, job: Job) -> bool:
@@ -37,10 +36,6 @@ class JobFilter:
             return True
         return (now or datetime.now(timezone.utc)) - job.posted_at <= self.max_age
 
-    def tag_b2b(self, job: Job) -> None:
-        found = {m.group(0).lower() for m in self.b2b.finditer(f"{job.title} {job.description}")}
-        job.b2b_signals = sorted(found)
-
     def apply(self, jobs: list[Job]) -> list[Job]:
         kept, seen = [], set()
         for job in jobs:
@@ -48,9 +43,5 @@ class JobFilter:
                 continue
             if self.title_ok(job) and self.location_ok(job) and self.fresh(job):
                 seen.add(job.key)
-                self.tag_b2b(job)
                 kept.append(job)
-        # Job có tín hiệu B2B lên trước, rồi tới job mới đăng
-        epoch = datetime.min.replace(tzinfo=timezone.utc)
-        kept.sort(key=lambda j: (bool(j.b2b_signals), j.posted_at or epoch), reverse=True)
         return kept

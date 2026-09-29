@@ -6,8 +6,10 @@ from pathlib import Path
 import yaml
 
 from . import output
+from .enrich import enrich
 from .filters import JobFilter
 from .http import session
+from .matching import Scorer
 from .sources import SOURCES
 
 log = logging.getLogger("jobscraper")
@@ -40,10 +42,15 @@ def main() -> None:
             stats[name] = f"LỖI: {type(exc).__name__}: {exc}"[:200]
         log.info("%s: %s", name, stats[name])
 
-    jobs = JobFilter(config).apply(collected)
-    log.info("Sau khi lọc: %d / %d job", len(jobs), len(collected))
+    candidates = JobFilter(config).apply(collected)
+    log.info("Qua bộ lọc tiêu đề/địa điểm/ngày đăng: %d / %d job", len(candidates), len(collected))
+    enrich(candidates, http)
+    jobs = Scorer(config).rank(candidates)
+    log.info("Sau khi chấm điểm theo hồ sơ: giữ %d job (ẩn %d job quá tầm hoặc điểm thấp)",
+             len(jobs), len(candidates) - len(jobs))
     for j in jobs:
-        log.info("  [%s] %s | %s | %s%s", j.source, j.title, j.company, j.location or "-", " | B2B" if j.b2b_signals else "")
+        log.info("  %+d [%s] %s | %s | %s | %s", j.score, j.source, j.title, j.company,
+                 j.location or "-", " · ".join(j.reasons))
     output.write_csv(jobs, str(args.csv))
     log.info("Đã ghi %s", args.csv)
 
@@ -69,9 +76,9 @@ def _summary(stats: dict, total: int, jobs: list, new: list) -> None:
     lines += [f"| {k} | {v.replace('|', '/')} |" for k, v in stats.items()]
     lines += ["", f"**{total}** tin thô → **{len(jobs)}** job phù hợp → **{len(new)}** job mới", ""]
     if new:
-        lines += ["| Vị trí | Công ty | Nguồn | B2B |", "|---|---|---|---|"]
+        lines += ["| Điểm | Vị trí | Công ty | Vì sao phù hợp |", "|---|---|---|---|"]
         lines += [
-            f"| [{j.title}]({j.url}) | {j.company} | {j.source} | {', '.join(j.b2b_signals)} |"
+            f"| {j.score} | [{j.title}]({j.url}) | {j.company} | {' · '.join(j.reasons)} |".replace("\n", " ")
             for j in new[:50]
         ]
     with open(path, "a", encoding="utf-8") as f:

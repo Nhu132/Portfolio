@@ -5,7 +5,9 @@ from pathlib import Path
 import yaml
 
 from jobscraper.dates import parse_date
+from jobscraper import enrich as enrich_mod
 from jobscraper.filters import JobFilter
+from jobscraper.matching import Scorer, extract_years
 from jobscraper.models import Job
 from jobscraper.output import HEADER, to_row
 from jobscraper.sources import careerviet, google_jobs, remoteok, remotive, topcv, vietnamworks, weworkremotely
@@ -28,6 +30,8 @@ class FakeResponse:
     @property
     def content(self):
         return self.body.encode()
+
+    status_code = 200
 
     def raise_for_status(self):
         pass
@@ -78,18 +82,71 @@ def test_location_filter():
     assert not f.location_ok(job("x", "USA Only", remote=True))
 
 
-def test_apply_dedupes_filters_and_sorts():
+def test_apply_dedupes_and_filters():
     f = JobFilter(CONFIG)
     jobs = [
         job("Content Lead", company="A", posted_at=NOW - timedelta(days=1)),
         job("Content Lead", company="A "),  # trùng với job trên
-        job("Marketing Lead", company="B", description="B2B SaaS company", posted_at=NOW - timedelta(days=3)),
-        job("Head of Content", company="C", posted_at=NOW - timedelta(days=60)),  # quá cũ
+        job("Marketing Lead", company="B", posted_at=NOW - timedelta(days=3)),
+        job("Head of Content", company="C", posted_at=NOW - timedelta(days=30)),  # quá cũ
         job("Content Writer", company="D"),
     ]
-    kept = f.apply(jobs)
-    assert [j.company for j in kept] == ["B", "A"]
-    assert kept[0].b2b_signals == ["b2b", "saas"]
+    assert [j.company for j in f.apply(jobs)] == ["A", "B"]
+
+
+# --- Chấm điểm theo hồ sơ ---------------------------------------------------
+
+def test_extract_years():
+    cases = {
+        "Requirements: 5+ years of B2B marketing experience": (5, None),
+        "3-5 years experience in content": (3, 5),
+        "At least 4 years’ experience leading a team": (4, None),
+        "Experience: minimum 2 years in a similar role": (2, None),
+        "Có ít nhất 3 năm kinh nghiệm ở vị trí tương đương": (3, None),
+        "Kinh nghiệm: 2 - 4 Năm": (2, 4),
+        "2 years in marketing, 6+ years of experience overall": (6, None),
+        "Công ty có hơn 15 năm kinh nghiệm. Yêu cầu 3 năm kinh nghiệm content": (3, None),
+        "Founded 25 years ago": None,
+        "No requirement mentioned": None,
+    }
+    for text, expected in cases.items():
+        assert extract_years(text) == expected, text
+
+
+def test_scorer_ranks_b2b_fit_and_fresh_first():
+    scorer = Scorer(CONFIG)
+    fit = job("B2B Content Lead", company="SaaS Co", posted_at=NOW - timedelta(hours=10),
+              description="We are a B2B SaaS company. 3+ years of content marketing experience, SEO, HubSpot.")
+    b2c = job("Trưởng phòng Marketing", company="Công ty Mỹ phẩm ABC", posted_at=NOW - timedelta(days=1))
+    too_senior = job("Head of Content", company="X", description="8+ years of marketing experience, B2B SaaS")
+    stretch = job("Content Marketing Lead", company="Y", posted_at=NOW - timedelta(days=5),
+                  description="B2B. 5+ years of experience in content")
+    unknown = job("Marketing Lead", company="Z")
+
+    ranked = scorer.rank([unknown, stretch, too_senior, b2c, fit], now=NOW)
+    assert [j.company for j in ranked] == ["SaaS Co", "Y", "Z"]
+    assert fit.years_required == "3+ năm"
+    assert "KN 3+ năm: vừa sức" in fit.reasons and "mới đăng (≤1 ngày)" in fit.reasons
+    assert "KN 5+ năm: cao" in stretch.reasons
+    assert b2c.score < 0
+
+
+def test_scorer_flags_senior_title_without_years():
+    j = job("Head of Marketing", company="Z")
+    Scorer(CONFIG).score(j, now=NOW)
+    assert j.score == -1 and "vị trí cấp cao" in j.reasons[0]
+
+
+def test_enrich_uses_linkedin_guest_api(monkeypatch):
+    monkeypatch.setattr(enrich_mod.time, "sleep", lambda s: None)
+    html = """<html><body><div class="show-more-less-html__markup">""" + "B2B SaaS. 4+ years of experience. " * 20 + \
+           """</div><ul><li class="description__job-criteria-item">Seniority level Mid-Senior level</li></ul></body></html>"""
+    http = FakeHttp(html)
+    j = Job(source="LinkedIn", title="Content Lead", company="A", url="https://vn.linkedin.com/jobs/view/content-lead-at-a-4012345678")
+    enrich_mod.enrich([j], http)
+    assert http.calls[0][0] == "https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/4012345678"
+    assert extract_years(j.description) == (4, None)
+    assert "Mid-Senior" in j.description
 
 
 def test_dedupe_key_ignores_accents_and_case():

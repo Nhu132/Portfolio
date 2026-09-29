@@ -58,21 +58,36 @@ remote_regions:
   - utc\s*\+\s*[5-9]
   - gmt\s*\+\s*[5-9]
 
-# Đánh dấu cột "Tín hiệu B2B" khi mô tả/tiêu đề chứa các từ này.
-b2b_signals:
-  - b2b
-  - saas
-  - enterprise
-  - software
-  - it\s+services
-  - outsourc
-  - tech(nology)?\s+company
-  - demand\s+gen
-  - account[-\s]based
-  - lead\s+gen
-
 # Chỉ lấy job đăng trong N ngày gần nhất (khi nguồn cung cấp ngày đăng).
-max_age_days: 14
+# Để 7 ngày: apply sớm thì tỉ lệ được đọc CV cao hơn nhiều so với tin đã đăng 2-3 tuần.
+max_age_days: 7
+
+# Hồ sơ của bạn: dùng để chấm "Điểm phù hợp" và ẩn job quá tầm.
+profile:
+  years_experience: 3     # số năm kinh nghiệm của bạn
+  max_years_above: 2      # ẩn job yêu cầu hơn (years_experience + số này) năm, vd 3 + 2 → ẩn job cần 6+ năm
+  min_score: 0            # ẩn job có điểm thấp hơn số này (job ngành B2C thường bị âm điểm)
+
+  # Cộng điểm khi tiêu đề/JD nhắc tới thế mạnh của bạn (lấy từ portfolio)
+  strengths:
+    - {label: B2B, pattern: '\bb2b\b|enterprise|khách\s+hàng\s+doanh\s+nghiệp', points: 3}
+    - {label: Tech/SaaS/IT, pattern: 'saas|software|phần\s+mềm|it\s+(services|outsourcing)|outsourc|technology\s+company|tech\s+company', points: 2}
+    - {label: Industrial/hardware, pattern: 'industrial|hardware|manufactur|engineering|drone|\biot\b|robotic', points: 2}
+    - {label: Viết tiếng Anh, pattern: 'fluent\s+(in\s+)?english|english\s+(writing|content|copywriting)|international\s+(audience|market)|global\s+(audience|market)|tiếng\s+anh', points: 2}
+    - {label: SEO, pattern: '\bseo\b', points: 1}
+    - {label: LinkedIn, pattern: 'linkedin', points: 1}
+    - {label: HubSpot/CRM, pattern: 'hubspot|\bcrm\b|marketing\s+automation', points: 1}
+    - {label: Lead gen, pattern: 'lead\s+gen|demand\s+gen|funnel|account[-\s]based', points: 1}
+    - {label: Product launch/GTM, pattern: 'product\s+launch|go[-\s]to[-\s]market|\bgtm\b|product\s+marketing', points: 1}
+    - {label: Thought leadership, pattern: 'thought\s+leadership|case\s+stud|white\s*paper|technical\s+(writing|content)', points: 1}
+
+  # Trừ điểm khi TIÊU ĐỀ hoặc TÊN CÔNG TY thuộc ngành B2C
+  avoid:
+    - {label: FMCG, pattern: 'fmcg|hàng\s+tiêu\s+dùng|consumer\s+goods', points: -3}
+    - {label: Làm đẹp, pattern: 'mỹ\s+phẩm|skincare|cosmetic|clinic|thẩm\s+mỹ|\bspa\b|beauty', points: -3}
+    - {label: F&B, pattern: 'f&b|\bfood\b|thực\s+phẩm|bubble\s+tea|trà\s+sữa|nhà\s+hàng|restaurant|coffee|cà\s+phê', points: -3}
+    - {label: Bất động sản, pattern: 'bất\s+động\s+sản|địa\s+ốc|real\s+estate', points: -3}
+    - {label: Thời trang, pattern: 'thời\s+trang|fashion', points: -3}
 
 # Bật/tắt từng nguồn.
 sources:

@@ -16,7 +16,10 @@ class Job:
     salary: str = ""
     posted_at: datetime | None = None
     description: str = ""
-    b2b_signals: list[str] = field(default_factory=list)
+    # Điền bởi bước chấm điểm (matching.py)
+    score: int = 0
+    reasons: list[str] = field(default_factory=list)
+    years_required: str = ""
 
     @property
     def key(self) -> str:

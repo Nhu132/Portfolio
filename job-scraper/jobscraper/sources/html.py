@@ -28,6 +28,13 @@ def all_text(node: Tag, selector: str) -> str:
     return ", ".join(" ".join(n.get_text(" ").split()) for n in node.select(selector))
 
 
+def plain(text: str) -> str:
+    """Bỏ thẻ HTML, gộp khoảng trắng."""
+    if "<" in text:
+        text = BeautifulSoup(text, "lxml").get_text(" ")
+    return " ".join(text.split())
+
+
 def slugify(term: str) -> str:
     term = unicodedata.normalize("NFKD", term.lower()).replace("đ", "d")
     term = "".join(c for c in term if not unicodedata.combining(c))

@@ -1,6 +1,6 @@
 # Job scraper: B2B Content Lead / Marketing Lead
 
-Mỗi sáng lúc 8:07 (giờ VN), GitHub Actions tự cào jobs **Content Lead / Head of Content / Marketing Lead** ở **TP.HCM hoặc Remote**, lọc bỏ tin trùng rồi thêm job mới lên đầu Google Sheet.
+Mỗi ngày 2 lần (8:07 và 14:07 giờ VN), GitHub Actions tự cào jobs **Content Lead / Head of Content / Marketing Lead** ở **TP.HCM hoặc Remote** đăng trong 7 ngày gần nhất, chấm điểm độ phù hợp với hồ sơ của bạn, ẩn job quá tầm kinh nghiệm, rồi thêm job mới lên đầu Google Sheet (job điểm cao nhất nằm trên cùng).
 
 | Nguồn | Cách lấy | Ghi chú |
 |---|---|---|
@@ -15,11 +15,25 @@ Mỗi nguồn chạy độc lập: nguồn nào lỗi thì bỏ qua và ghi vào
 
 ## Google Sheet
 
-| ID | Ngày tìm thấy | Nguồn | Vị trí | Công ty | Địa điểm | Remote | Lương | Ngày đăng | Tín hiệu B2B | Link | Trạng thái | Ghi chú |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| ID | Ngày tìm thấy | Điểm phù hợp | Vị trí | Công ty | Địa điểm | Remote | Lương | Ngày đăng | KN yêu cầu | Vì sao phù hợp | Nguồn | Link | Trạng thái | Ghi chú |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 
-- Job có từ khoá B2B/SaaS/software/outsourcing… được ghi ở cột **Tín hiệu B2B** và xếp lên trên.
 - Cùng vị trí + công ty xuất hiện ở nhiều nguồn chỉ ghi **một lần**. Job đã có trong Sheet sẽ không bị thêm lại, nên cột **Trạng thái / Ghi chú** bạn tự sửa (đã apply, phỏng vấn…) được giữ nguyên.
+
+## Cách chấm "Điểm phù hợp"
+
+Hồ sơ nằm ở mục `profile` trong `config.yaml` (lấy từ portfolio: B2B content, tech/industrial, viết tiếng Anh, SEO, LinkedIn, HubSpot, product launch).
+
+| Tiêu chí | Điểm |
+|---|---|
+| JD nhắc tới thế mạnh của bạn (B2B +3, Tech/SaaS/IT +2, Industrial +2, tiếng Anh +2, SEO/LinkedIn/HubSpot/Lead gen/Launch/Thought leadership +1 mỗi mục) | cộng dồn |
+| Tiêu đề hoặc tên công ty thuộc ngành B2C (FMCG, mỹ phẩm/clinic, F&B, bất động sản, thời trang) | −3 |
+| Kinh nghiệm yêu cầu ≤ số năm của bạn / hơn 1 năm / hơn 2 năm | +3 / +1 / −1 |
+| Yêu cầu nhiều hơn 2 năm so với bạn | **ẩn** |
+| Không ghi số năm nhưng là vị trí cấp cao (Head of, Trưởng phòng, Director) | −1 |
+| Đăng ≤1 ngày / ≤3 ngày / ≤7 ngày | +3 / +2 / +1 |
+
+Job có điểm âm bị ẩn (`min_score: 0`). Với job LinkedIn, CareerViet… không kèm JD, tool mở trang chi tiết để đọc yêu cầu kinh nghiệm.
 
 ## Cài đặt (làm một lần, khoảng 15 phút)
 
@@ -59,7 +73,8 @@ Sửa `config.yaml`:
 - `search_terms`: từ khoá tìm kiếm.
 - `title_include` / `title_exclude`: lọc theo tiêu đề (regex).
 - `locations`, `remote_regions`: lọc địa điểm.
-- `b2b_signals`: từ khoá đánh dấu B2B.
+- `max_age_days`: chỉ lấy tin đăng trong N ngày.
+- `profile`: số năm kinh nghiệm, thế mạnh (cộng điểm), ngành muốn tránh (trừ điểm), điểm tối thiểu.
 - `sources`: bật/tắt từng nguồn.
 
 ## Chạy trên máy
