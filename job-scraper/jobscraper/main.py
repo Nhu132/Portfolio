@@ -42,6 +42,8 @@ def main() -> None:
 
     jobs = JobFilter(config).apply(collected)
     log.info("Sau khi lọc: %d / %d job", len(jobs), len(collected))
+    for j in jobs:
+        log.info("  [%s] %s | %s | %s%s", j.source, j.title, j.company, j.location or "-", " | B2B" if j.b2b_signals else "")
     output.write_csv(jobs, str(args.csv))
     log.info("Đã ghi %s", args.csv)
 

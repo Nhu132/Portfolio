@@ -1,5 +1,6 @@
 import logging
 
+from ..http import USER_AGENT
 from ..models import Job
 from .html import first, slugify, soup, text
 
@@ -9,10 +10,18 @@ URL = "https://www.topcv.vn/tim-viec-lam-{slug}"
 
 
 def fetch(config, http) -> list[Job]:
+    # TopCV dùng Cloudflare, chặn requests thường (403): giả lập TLS fingerprint của Chrome
+    import tls_client
+
+    browser = tls_client.Session(client_identifier="chrome_120", random_tls_extension_order=True)
+    headers = {"User-Agent": USER_AGENT, "Accept-Language": "vi-VN,vi;q=0.9,en;q=0.8",
+               "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"}
     jobs = []
     for term in config["search_terms"]:
-        resp = http.get(URL.format(slug=slugify(term)), params={"type_keyword": 1, "sba": 1}, timeout=30)
-        resp.raise_for_status()
+        resp = browser.get(URL.format(slug=slugify(term)), params={"type_keyword": 1, "sba": 1},
+                           headers=headers, timeout_seconds=30)
+        if resp.status_code != 200:
+            raise RuntimeError(f"HTTP {resp.status_code} cho '{term}'")
         found = parse(resp.text)
         if not found:
             log.warning("TopCV: không đọc được job nào cho '%s' (có thể bị chặn hoặc đổi giao diện)", term)
