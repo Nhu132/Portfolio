@@ -30,6 +30,13 @@ title_exclude:
   - assistant
   - trợ\s+lý
   - sales\s+(executive|representative)
+  # Mảng marketing khác, không phải content
+  - trade\s+marketing
+  - performance\s+marketing
+  - influencer
+  # Địa điểm ghi trong tiêu đề
+  - h[àa]\s*n[ộo]i
+  - đà\s+nẵng|da\s+nang
 
 # Địa điểm (cho job không remote): giữ job ở các khu vực này.
 locations:
@@ -74,7 +81,7 @@ sources:
   weworkremotely: true
   himalayas: true
   vietnamworks: true
-  topcv: true
+  topcv: false         # Cloudflare chặn IP GitHub Actions (403); tin TopCV vẫn có qua Google Jobs
   careerviet: true
   linkedin: true        # qua thư viện JobSpy
   indeed: true          # qua thư viện JobSpy (vn.indeed.com)

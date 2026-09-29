@@ -40,18 +40,25 @@ def _fetch(site: str, label: str, config) -> list[Job]:
                 log.warning("%s: lỗi khi tìm '%s' @ %s: %s", label, term, location, exc)
                 continue
             for row in df.to_dict("records"):
+                # Lượt tìm "Vietnam + remote" trả cả job onsite ở tỉnh khác: chỉ giữ job thực sự remote
+                if remote and not _flag(row.get("is_remote")):
+                    continue
                 jobs.append(Job(
                     source=label,
                     title=_s(row.get("title")),
                     company=_s(row.get("company")),
                     url=_s(row.get("job_url")),
                     location=_s(row.get("location")),
-                    remote=bool(row.get("is_remote")) or remote,
+                    remote=_flag(row.get("is_remote")),
                     salary=_salary(row),
                     posted_at=parse_date(_s(row.get("date_posted"))),
                     description=_s(row.get("description")),
                 ))
     return jobs
+
+
+def _flag(value) -> bool:
+    return value is not None and value == True  # noqa: E712 (NaN của pandas phải tính là False)
 
 
 def _s(value) -> str:

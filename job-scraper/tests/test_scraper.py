@@ -55,7 +55,9 @@ def test_title_filter():
     f = JobFilter(CONFIG)
     keep = ["B2B Content Lead", "Head of Content", "Content Marketing Lead", "Marketing Lead (SaaS)",
             "Trưởng nhóm Content", "Trưởng phòng Marketing", "Content Team Leader", "Lead, Content Marketing"]
-    drop = ["Content Writer", "Marketing Intern", "Junior Content Lead", "Sales Executive", "Thực tập sinh Marketing"]
+    drop = ["Content Writer", "Marketing Intern", "Junior Content Lead", "Sales Executive", "Thực tập sinh Marketing",
+            "Trade Marketing Lead", "SEO/ Performance Marketing Team Lead", "BW Influencer Marketing Lead",
+            "[Ha Noi] Education Content Manager", "Trưởng phòng Marketing tại Hà Nội"]
     assert all(f.title_ok(job(t)) for t in keep)
     assert not any(f.title_ok(job(t)) for t in drop)
 

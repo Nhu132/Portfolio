@@ -6,7 +6,8 @@ Mỗi sáng lúc 8:07 (giờ VN), GitHub Actions tự cào jobs **Content Lead /
 |---|---|---|
 | Remotive, RemoteOK, We Work Remotely, Himalayas | API / RSS công khai | Job remote quốc tế, chỉ giữ tin tuyển Worldwide/APAC/Asia/Vietnam hoặc không giới hạn khu vực |
 | VietnamWorks | API tìm kiếm của trang | |
-| TopCV, CareerViet | Đọc HTML | Có thể bị chặn hoặc hỏng khi trang đổi giao diện |
+| CareerViet | Đọc HTML | Có thể hỏng khi trang đổi giao diện |
+| TopCV | Đọc HTML | **Tắt mặc định**: Cloudflare chặn IP của GitHub Actions. Tin TopCV vẫn xuất hiện qua Google Jobs |
 | LinkedIn, Indeed | Thư viện [JobSpy](https://github.com/speedyapply/JobSpy) | Hai trang này chống bot; thỉnh thoảng sẽ bị giới hạn |
 | Google Jobs | [SerpAPI](https://serpapi.com) (gói free) | Chỉ chạy khi có `SERPAPI_KEY` |
 
